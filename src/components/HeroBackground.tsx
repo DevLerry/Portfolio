@@ -1,36 +1,44 @@
 /**
- * The hero's atmosphere: four stacked decorative layers, and nothing else.
+ * The hero's atmosphere: four decorative layers, in a deliberate order.
  *
- * Every layer here is pure decoration, so the whole thing is:
+ * ORDER MATTERS, and getting it wrong is what made the first version's grid invisible.
+ * The glow and the wash used to sit ON TOP of the lattice and washed it out, so raising
+ * the line opacity alone would never have fixed it. Now:
+ *
+ *    wash    — secondary purple, bottom
+ *    glow    — violet radial, still beneath the grid
+ *    GRID    — above both, so it stays crisp against them
+ *    vignette— the only thing over the grid, and deliberately gentle
+ *
+ * The whole stack is:
  *   - `aria-hidden` — a screen reader hears the headline, not a description of gradients
- *   - `pointer-events-none` — clicks, taps and text selection pass straight through to the
- *     content above. Without this the grid would sit over the buttons and swallow taps.
- *   - negatively z-indexed — behind the content, above the page background
+ *   - `pointer-events-none` — clicks, taps and text selection pass straight through
+ *   - `overflow-hidden` — clips the oversized grid so it cannot create a scrollbar
  *
- * Nothing in this file re-renders. The movement is CSS only: a React state update sixty
- * times a second to animate a background would burn battery for no visual gain.
+ * Nothing here re-renders. The movement is CSS only: updating React state sixty times a
+ * second to animate a background would cost battery and buy nothing.
  */
 export function HeroBackground() {
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-      {/* 1. The lattice, drifting. `motion-safe:` is Tailwind's prefers-reduced-motion
-             guard — if the visitor asked their system for less movement, the grid is
-             simply still. The design is unchanged; only the motion goes. */}
-      <div className="hero-grid motion-safe:animate-drift" />
+      {/* 1. Secondary purple wash. */}
+      <div className="hero-wash" />
 
       {/* 2. Violet glow behind the headline, breathing very slowly. */}
       <div className="hero-glow motion-safe:animate-breathe" />
 
-      {/* 3. A wash of the secondary purple. */}
-      <div className="hero-wash" />
+      {/* 3. The lattice — above the glow so it reads clearly, drifting diagonally.
+             Its animation is in index.css rather than a `motion-safe:` utility because
+             reduced motion must stop the MOVEMENT while keeping the grid visible; the
+             global reduced-motion rule does exactly that. */}
+      <div className="hero-grid" />
 
-      {/* 4. Vignette last, so it darkens everything beneath it. */}
+      {/* 4. Vignette, the only layer over the grid. Gentle by design. */}
       <div className="hero-vignette" />
 
-      {/* A single quiet crosshair — the one deliberate "technical canvas" detail. Placed
-          off-centre so it reads as an instrument marking rather than decoration. */}
+      {/* A single quiet crosshair — the one deliberate "technical canvas" detail. */}
       <svg
-        className="absolute top-[22%] right-[12%] hidden text-violet-soft/25 lg:block"
+        className="absolute top-[22%] right-[12%] hidden text-violet-soft/30 lg:block"
         width="28"
         height="28"
         viewBox="0 0 28 28"

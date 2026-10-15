@@ -7,52 +7,136 @@
    here under @theme. A token named --color-ink becomes `text-ink`, `bg-ink`, `border-ink`
    and so on, automatically.
 
-   THIS IS THE FILE TO EDIT when you want to change the look. The hero reads every colour,
-   every animation speed and the grid's opacity from here, so you can retune the whole
-   page without touching a component.
+   THIS IS THE FILE TO EDIT to change the look. The hero reads every colour, the grid's
+   spacing and opacity, and every animation speed from here.
 --------------------------------------------------------------------------------------- */
 @theme {
-  /* --- Surfaces: a near-black purple, deep and atmospheric rather than neon. --- */
-  --color-canvas: #100817; /* page background */
-  --color-surface: #1b0d2b; /* raised panels, the badge */
+  /* --- Surfaces --- */
+  --color-canvas: #100817; /* base background */
+  --color-surface: #180b25; /* secondary background: panels, the badge */
 
-  /* --- The one accent. Used sparingly: it is what the eye should find. --- */
+  /* --- The accent. Used sparingly: it is what the eye should find. --- */
   --color-violet: #8b5cf6;
-  --color-violet-soft: #a78bfa; /* for gradient ends and hover states */
-  /* Deeper violets, used ONLY where white text sits on top. #8b5cf6 is a beautiful accent
-     on a near-black page, but white on it measures 3.97:1 — under the 4.5:1 WCAG asks for
-     body text. These two pass at 5.7:1 and read richer besides. */
+  --color-violet-soft: #a78bfa;
+  /* Deeper violets, used ONLY where white text sits on top. White on #8b5cf6 measures
+     3.97:1, under the 4.5:1 WCAG asks for. These give 5.35:1 and read richer besides. */
   --color-violet-deep: #5b21b6;
   --color-violet-mid: #7c3aed;
 
-  /* --- Text. --- */
-  --color-ink: #f8f7fc; /* headlines, button labels */
-  --color-ink-muted: #b8b0c7; /* body copy, the lavender-grey */
+  /* --- Text --- */
+  --color-ink: #f8f7fc;
+  --color-ink-muted: #b8b0c7;
 
-  /* --- Status. --- */
-  --color-online: #34d399; /* the availability dot */
+  /* --- Status --- */
+  --color-online: #34d399;
 
-  /* --- The signature diagonal grid. ---------------------------------------------------
-     --grid-size   : distance between lines. Smaller = denser.
-     --grid-opacity: 0.03–0.07 is the brief. Above ~0.09 it starts to look like graph paper.
-     --grid-angle  : rotation of the whole lattice.
-     --grid-drift  : how long one full loop takes. Longer = calmer.
-  */
-  --grid-size: 54px;
-  --grid-opacity: 0.055;
-  --grid-angle: 34deg;
-  --grid-drift: 28s;
-
-  /* --- Motion. ------------------------------------------------------------------------
-     Entrance is deliberately quick; the background is deliberately slow.
-  */
+  /* --- Motion --- */
   --animate-rise: rise 0.7s cubic-bezier(0.2, 0.7, 0.3, 1) both;
-  --animate-drift: drift var(--grid-drift) linear infinite;
   --animate-breathe: breathe 11s ease-in-out infinite alternate;
   --animate-pulse-dot: pulse-dot 2.4s ease-in-out infinite;
 }
 
-/* The content's entrance: a small lift, nothing theatrical. */
+/* ---------------------------------------------------------------------------------------
+   THE DIAGONAL GRID — the page's signature.
+
+   Four stacked gradients: two crisp 1px lines at 45° and 135° that form the lattice, and
+   two softer 3px lines underneath in a dimmer violet that halo them and give the lines
+   depth rather than looking drawn-on.
+
+   ── Why the motion loops without a visible jump ──────────────────────────────────────
+   A 45° stripe pattern whose bands sit --grid-gap apart repeats horizontally every
+   gap x sqrt(2), not every gap: the diagonal has to travel further to get back to the
+   same place. That distance is --grid-period. Shift the background by any whole number
+   of periods and the pattern lands exactly on top of itself, so the reset is invisible.
+
+   We shift 2 periods across for 1 down. Two reasons: it reads as a diagonal drift, and
+   because that direction is parallel to NEITHER family of lines, both sets visibly move.
+   A 1:1 shift would run exactly along one family, leaving those lines looking frozen.
+--------------------------------------------------------------------------------------- */
+:root {
+  --grid-gap: 40px; /* distance between lines */
+  --grid-line: rgba(167, 139, 250, 0.22); /* the lattice itself — raise to make it bolder */
+  --grid-glow: rgba(139, 92, 246, 0.1); /* the halo under each line */
+  --grid-speed: 16s; /* one full loop. Higher = calmer */
+
+  /* sqrt(2). Do not round this: an inexact period is exactly what makes a grid stutter. */
+  --grid-period: calc(var(--grid-gap) * 1.41421356);
+  --grid-shift-x: calc(var(--grid-period) * 2);
+  --grid-shift-y: var(--grid-period);
+}
+
+.hero-grid {
+  position: absolute;
+  /* Oversized on every side so the pattern never runs out at a corner. The parent clips
+     it, which is what stops this creating a horizontal scrollbar. */
+  inset: -50%;
+  background-image:
+    repeating-linear-gradient(45deg, var(--grid-line) 0 1px, transparent 1px var(--grid-gap)),
+    repeating-linear-gradient(135deg, var(--grid-line) 0 1px, transparent 1px var(--grid-gap)),
+    repeating-linear-gradient(45deg, var(--grid-glow) 0 3px, transparent 3px var(--grid-gap)),
+    repeating-linear-gradient(135deg, var(--grid-glow) 0 3px, transparent 3px var(--grid-gap));
+  animation: grid-drift var(--grid-speed) linear infinite;
+  will-change: background-position;
+}
+
+@keyframes grid-drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: var(--grid-shift-x) var(--grid-shift-y);
+  }
+}
+
+/* ---------------------------------------------------------------------------------------
+   The other background layers.
+--------------------------------------------------------------------------------------- */
+
+/* A wash of the secondary purple, warming the top and bottom. Sits UNDER the grid. */
+.hero-wash {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    var(--color-surface) 0%,
+    transparent 42%,
+    color-mix(in oklab, var(--color-surface) 55%, transparent) 100%
+  );
+}
+
+/* Violet glow behind the headline. Also UNDER the grid — when this sat on top it was
+   what washed the lattice out, which is why the grid looked like it was barely there. */
+.hero-glow {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  width: min(1200px, 130vw);
+  height: min(1200px, 130vw);
+  transform: translate3d(-50%, -50%, 0);
+  background: radial-gradient(
+    circle,
+    color-mix(in oklab, var(--color-violet) 26%, transparent) 0%,
+    color-mix(in oklab, var(--color-violet) 9%, transparent) 38%,
+    transparent 66%
+  );
+}
+
+/* Vignette: the only layer above the grid. Deliberately gentle — it starts at 55% so the
+   lattice stays crisp across the middle and only fades out toward the far corners. */
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    130% 100% at 50% 42%,
+    transparent 55%,
+    color-mix(in oklab, var(--color-canvas) 55%, transparent) 82%,
+    color-mix(in oklab, var(--color-canvas) 88%, transparent) 100%
+  );
+}
+
+/* ---------------------------------------------------------------------------------------
+   Keyframes for the content.
+--------------------------------------------------------------------------------------- */
 @keyframes rise {
   from {
     opacity: 0;
@@ -64,29 +148,14 @@
   }
 }
 
-/* The grid's drift.
-
-   The trick that makes this seamless: move by EXACTLY one tile, then snap back. Because
-   tile N+1 looks identical to tile N, the reset is invisible — there is no jump at the
-   loop boundary. Moving by any other distance would visibly stutter once per cycle. */
-@keyframes drift {
-  from {
-    transform: rotate(var(--grid-angle)) translate3d(0, 0, 0);
-  }
-  to {
-    transform: rotate(var(--grid-angle)) translate3d(var(--grid-size), var(--grid-size), 0);
-  }
-}
-
-/* The glow behind the headline, breathing almost imperceptibly. */
 @keyframes breathe {
   from {
-    opacity: 0.55;
+    opacity: 0.6;
     transform: translate3d(-50%, -50%, 0) scale(1);
   }
   to {
-    opacity: 0.8;
-    transform: translate3d(-50%, -50%, 0) scale(1.12);
+    opacity: 0.85;
+    transform: translate3d(-50%, -50%, 0) scale(1.1);
   }
 }
 
@@ -104,9 +173,8 @@
 
 /* --- Base --------------------------------------------------------------------------- */
 html {
-  /* Anchor links (#projects) glide instead of teleporting. */
   scroll-behavior: smooth;
-  /* The rotated grid is wider than the screen by design; never let it push the page sideways. */
+  /* The grid layer is deliberately wider than the screen; never let it reach the scrollbar. */
   overflow-x: hidden;
 }
 
@@ -116,7 +184,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* One visible focus style for everything, so keyboard users are never lost. */
 :focus-visible {
   outline: 2px solid var(--color-violet-soft);
   outline-offset: 3px;
@@ -124,8 +191,8 @@ body {
 }
 
 /* --- Reduced motion -----------------------------------------------------------------
-   Someone who has asked their system for less movement gets the finished composition
-   immediately: no drift, no breathing, no entrance. They see the same design, at rest. */
+   Movement stops; the grid itself stays exactly as visible. Someone who asked for less
+   motion gets the same composition, at rest — not a blank background. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -135,82 +202,4 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
-
-/* ---------------------------------------------------------------------------------------
-   The hero's background layers.
-
-   All four are decorative: they sit behind the content, are hidden from screen readers,
-   and never take a click. Written as CSS classes rather than utilities because the
-   transforms are intricate and belong next to the keyframes that drive them.
---------------------------------------------------------------------------------------- */
-:root {
-  /* One line colour, derived from the accent and the opacity knob above, so there is a
-     single place to make the grid more or less visible. */
-  --grid-line: color-mix(
-    in oklab,
-    var(--color-violet-soft) calc(var(--grid-opacity) * 100%),
-    transparent
-  );
-}
-
-/* 1. The diagonal lattice. -------------------------------------------------------------
-   Two sets of 1px lines at right angles, then the whole plane is rotated — which is what
-   turns a graph-paper square grid into a slanted, technical lattice.
-
-   It is 260vmax square and centred, so after rotation its corners still cover the screen.
-   `overflow-x: hidden` on <html> stops that extra width reaching the scrollbar. */
-.hero-grid {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 260vmax;
-  height: 260vmax;
-  transform: translate3d(-50%, -50%, 0) rotate(var(--grid-angle));
-  background-image:
-    repeating-linear-gradient(0deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size)),
-    repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px var(--grid-size));
-  /* Hint that only the transform changes, so the browser can keep this on its own layer. */
-  will-change: transform;
-}
-
-/* 2. The glow behind the headline. */
-.hero-glow {
-  position: absolute;
-  top: 42%;
-  left: 50%;
-  width: min(1200px, 130vw);
-  height: min(1200px, 130vw);
-  transform: translate3d(-50%, -50%, 0);
-  background: radial-gradient(
-    circle,
-    color-mix(in oklab, var(--color-violet) 20%, transparent) 0%,
-    color-mix(in oklab, var(--color-surface) 45%, transparent) 38%,
-    transparent 68%
-  );
-}
-
-/* 3. A wash of the secondary purple, warming the top of the page. */
-.hero-wash {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    color-mix(in oklab, var(--color-surface) 70%, transparent) 0%,
-    transparent 45%,
-    color-mix(in oklab, var(--color-surface) 35%, transparent) 100%
-  );
-}
-
-/* 4. The vignette: darkens the edges so the eye is pulled to the centre, and quietly
-      hides where the rotated grid runs out. */
-.hero-vignette {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    125% 95% at 50% 42%,
-    transparent 30%,
-    color-mix(in oklab, var(--color-canvas) 72%, transparent) 72%,
-    var(--color-canvas) 100%
-  );
 }
