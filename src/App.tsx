@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { About } from './components/About'
 import { CaseStudies } from './components/CaseStudies'
+import { Contact } from './components/Contact'
 import { Hero } from './components/Hero'
 import { Projects } from './components/Projects'
 
@@ -38,6 +39,7 @@ export default function App() {
       <Projects />
       <CaseStudies />
       <About />
+      <Contact />
     </main>
   )
 }

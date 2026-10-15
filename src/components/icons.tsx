@@ -85,3 +85,37 @@ export function ChevronDownIcon({ className = 'h-4 w-4' }: IconProps) {
     </svg>
   )
 }
+
+export function MailIcon({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg aria-hidden="true" className={className} viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2.5" y="4.5" width="15" height="11" rx="2" />
+      <path d="m3 6 7 5 7-5" />
+    </svg>
+  )
+}
+
+export function CopyIcon({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg aria-hidden="true" className={className} viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="7" y="7" width="9.5" height="9.5" rx="2" />
+      <path d="M13 4.5H5.5a2 2 0 0 0-2 2V13" />
+    </svg>
+  )
+}
+
+export function CheckIcon({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg aria-hidden="true" className={className} viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m4.5 10.5 3.5 3.5 7.5-8" />
+    </svg>
+  )
+}
+
+export function ArrowUpIcon({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg aria-hidden="true" className={className} viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M10 16V5M5.5 9.5 10 5l4.5 4.5" />
+    </svg>
+  )
+}

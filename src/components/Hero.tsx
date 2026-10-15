@@ -1,3 +1,4 @@
+import { CV_URL } from '../data/contact'
 import { HeroBackground } from './HeroBackground'
 import { ArrowRightIcon, DownloadIcon } from './icons'
 
@@ -10,15 +11,8 @@ import { ArrowRightIcon, DownloadIcon } from './icons'
    TODO(Imran): both are placeholders until the real things exist.
 ----------------------------------------------------------------------------------------- */
 
-/** The Projects section, which we build next. Until then this scrolls to the page bottom. */
+/** The Projects section. */
 const PROJECTS_HREF = '#projects'
-
-/**
- * Put the PDF at `public/cv.pdf` and this works with no code change — anything in `public/`
- * is served from the site root. Change the name here if you'd rather call the file
- * something else.
- */
-const CV_HREF = '/cv.pdf'
 
 export function Hero() {
   return (
@@ -88,14 +82,19 @@ export function Hero() {
             <ArrowRightIcon className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
           </a>
 
-          <a
-            href={CV_HREF}
-            download
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-violet/30 bg-surface/40 px-7 py-3.5 font-medium text-ink-muted backdrop-blur-sm transition duration-200 hover:-translate-y-0.5 hover:border-violet/60 hover:bg-surface/70 hover:text-ink sm:w-auto"
-          >
-            <DownloadIcon />
-            Download CV
-          </a>
+          {/* Only rendered once CV_URL is set in src/data/contact.ts. Before this guard the
+              button pointed at /cv.pdf, which does not exist — a 404 waiting for the first
+              recruiter who clicked it. */}
+          {CV_URL && (
+            <a
+              href={CV_URL}
+              download
+              className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-violet/30 bg-surface/40 px-7 py-3.5 font-medium text-ink-muted backdrop-blur-sm transition duration-200 hover:-translate-y-0.5 hover:border-violet/60 hover:bg-surface/70 hover:text-ink sm:w-auto"
+            >
+              <DownloadIcon />
+              Download CV
+            </a>
+          )}
         </div>
       </div>
     </section>
