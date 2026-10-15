@@ -13,9 +13,8 @@ const PROJECTS_HREF = '#projects'
  * radius clamps to half of each axis independently — so a 4:5 frame becomes the oval this
  * wants without any clip-path.
  *
- * The source is 870x1080 — an aspect of 0.806 against the frame's 0.800 — so object-cover
- * crops almost nothing. A studio headshot already framed for this, which is why the crop
- * needs no correcting the way the earlier phone photo did.
+ * object-position sits slightly above centre because the source is a 9:16 phone photo and
+ * a straight centre crop would cut the chin.
  */
 function Portrait() {
   return (
@@ -34,28 +33,15 @@ function Portrait() {
       <img
         src={portrait}
         alt="Murtala Imran Dauda"
-        width={870}
+        width={608}
         height={1080}
         /* The only image above the fold, so it loads eagerly and is fetched early —
            everything else on the page waits until it is near the viewport. */
         loading="eager"
         fetchPriority="high"
         decoding="async"
-        className="aspect-[4/5] w-full rounded-full object-cover object-top shadow-[0_30px_80px_-30px_rgba(0,0,0,0.95)] ring-1 ring-violet/30"
-      />
-
-      {/* The headshot was photographed on white, which against a near-black page reads as a
-          bright blob rather than a portrait. This fades only the OUTER edge of the oval into
-          the page colour — transparent across the middle, so his face is untouched — and the
-          portrait then sits in the design instead of on top of it.
-          Remove this one element to get the plain white oval back. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 rounded-full"
-        style={{
-          background:
-            'radial-gradient(circle at 50% 44%, transparent 46%, color-mix(in oklab, var(--color-canvas) 45%, transparent) 78%, color-mix(in oklab, var(--color-canvas) 88%, transparent) 100%)',
-        }}
+        className="aspect-[4/5] w-full rounded-full object-cover shadow-[0_30px_80px_-30px_rgba(0,0,0,0.95)] ring-1 ring-violet/30"
+        style={{ objectPosition: 'center 38%' }}
       />
     </div>
   )
