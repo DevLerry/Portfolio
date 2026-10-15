@@ -194,12 +194,12 @@ export interface Role {
 
 export const experience: Role[] = [
   {
-    title: 'Software Development & Technical Support',
+    title: 'IT Trainee Lead',
     org: 'Triax Technologies',
     period: 'Current',
     current: true,
-    // TODO(Imran): confirm this wording — it is lifted from the CV you are revising.
-    unconfirmed: true,
+    // Title confirmed by Imran, 15 Oct 2026. The bullets below still come from his CV and
+    // are his to adjust.
     points: [
       'Supporting testing activities and helping identify areas needing review.',
       'Contributing to project work including front-end development and scaffolding.',
