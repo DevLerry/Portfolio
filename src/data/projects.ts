@@ -17,7 +17,10 @@ import vioraPreview from '../assets/viora-preview.png'
    modest — the first thing a reviewer does is click the links.
 ----------------------------------------------------------------------------------------- */
 
-export type ProjectStatus = 'live' | 'in-development' | 'coming-soon'
+/** `planned` is deliberately distinct from `in-development`: nothing has been built yet,
+    and saying otherwise on a public portfolio is the kind of small overstatement a reviewer
+    notices. */
+export type ProjectStatus = 'live' | 'in-development' | 'planned' | 'coming-soon'
 
 export type Preview =
   | { kind: 'image'; src: string; alt: string }
@@ -97,19 +100,19 @@ export const projects: Project[] = [
   },
   {
     number: '03',
-    name: 'Triax Pulse',
-    category: 'Software Product', // TODO(Imran): replace with the real category.
-    // TODO(Imran): nothing about this project exists in any repository I could inspect, so
-    // this is the placeholder wording from the brief, not a verified description. Replace it
-    // — and the category and tech tags — with the real thing before sharing the portfolio.
+    name: 'Enterprise App Management & Tracking System',
+    category: 'Enterprise Software', // TODO(Imran): confirm the category once scoped.
+    // TODO(Imran): this project has not been started — there is no repository, no code and no
+    // documentation to describe. The wording below says only that, and nothing more. Replace
+    // it with the real problem, users and stack once the build begins.
     description:
-      'An evolving software project built around a clear product vision and a focus on reliable engineering.',
-    tech: [], // TODO(Imran): add the real stack once the project exists in a repository.
-    status: 'in-development',
-    statusNote: 'In development',
+      'An enterprise platform for managing and tracking applications across an organisation. Currently at the planning stage — scope and architecture still being defined.',
+    tech: [], // TODO(Imran): add the real stack once the build begins.
+    status: 'planned',
+    statusNote: 'Planned — not yet started',
     preview: {
       kind: 'placeholder',
-      note: 'Screenshot to be added',
+      note: 'Not yet built',
     },
     unverified: true,
     layout: 'left',
@@ -119,9 +122,12 @@ export const projects: Project[] = [
     name: 'AI Response Bot',
     category: 'Artificial Intelligence',
     description:
-      'An upcoming AI-powered project currently in development. More details will be revealed as the product takes shape.',
+      'An AI-powered project currently in development. More details will be revealed as the product takes shape.',
     tech: [],
-    status: 'coming-soon',
+    status: 'in-development',
+    statusNote: 'In development',
+    // Still the abstract treatment: there is no interface to photograph yet, and a mockup
+    // presented as a screenshot would be the most misleading thing on this page.
     preview: { kind: 'coming-soon' },
     layout: 'compact',
   },

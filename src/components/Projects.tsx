@@ -14,6 +14,8 @@ import { ProjectPreview } from './ProjectPreview'
 const STATUS_STYLES = {
   live: 'border-online/30 bg-online/10 text-online',
   'in-development': 'border-violet/30 bg-violet/10 text-violet-soft',
+  // Planned work reads quieter than work in progress — it has earned less emphasis.
+  planned: 'border-ink-muted/25 bg-surface/70 text-ink-muted',
   'coming-soon': 'border-violet/30 bg-violet/10 text-violet-soft',
 } as const
 

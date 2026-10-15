@@ -19,7 +19,7 @@ export interface CaseSection {
 export interface CaseStudy {
   id: string
   name: string
-  status: 'live' | 'in-development' | 'coming-soon'
+  status: 'live' | 'in-development' | 'planned' | 'coming-soon'
   statusLabel: string
   tagline: string
   /** Stated only where it is verifiable. */
@@ -123,18 +123,17 @@ export const caseStudies: CaseStudy[] = [
     repoUrl: 'https://github.com/DevLerry/digital-banking-backend-assignment',
   },
   {
-    id: 'triax-pulse',
-    name: 'Triax Pulse',
-    status: 'in-development',
-    statusLabel: 'In development',
-    tagline: 'An evolving software project built around a clear product vision.',
-    // TODO(Imran): no repository or documentation for this project could be inspected, so
-    // there is no verified material to write a case study from. Supply the problem it solves,
-    // who it is for, the stack and its current status, and this becomes a real entry.
+    id: 'enterprise-app-management',
+    name: 'Enterprise App Management & Tracking System',
+    status: 'planned',
+    statusLabel: 'Planned',
+    tagline: 'An enterprise platform for managing and tracking applications across an organisation.',
+    // TODO(Imran): the build has not started, so there is no architecture, no decision and no
+    // challenge to write about yet. This becomes a real case study once there is a codebase.
     intro: [
       {
-        heading: 'The problem',
-        body: 'Details to be added.',
+        heading: 'Status',
+        body: 'At the planning stage. Scope and architecture are still being defined, so there is nothing built to write a case study about yet.',
       },
     ],
     detail: [],
@@ -143,13 +142,13 @@ export const caseStudies: CaseStudy[] = [
   {
     id: 'ai-response-bot',
     name: 'AI Response Bot',
-    status: 'coming-soon',
-    statusLabel: 'Coming soon',
-    tagline: 'An upcoming AI-powered project currently in development.',
+    status: 'in-development',
+    statusLabel: 'In development',
+    tagline: 'An AI-powered project currently in development.',
     intro: [
       {
         heading: 'About',
-        body: 'An upcoming AI-powered project currently in development. More details will be revealed as the product takes shape.',
+        body: 'An AI-powered project currently in development. More details will be revealed as the product takes shape.',
       },
     ],
     detail: [],

@@ -18,6 +18,7 @@ import { ChevronDownIcon, ExternalLinkIcon, GithubIcon } from './icons'
 const STATUS_STYLE = {
   live: 'border-online/35 bg-online/10 text-online',
   'in-development': 'border-violet/30 bg-violet/10 text-violet-soft',
+  planned: 'border-ink-muted/25 bg-surface/70 text-ink-muted',
   'coming-soon': 'border-violet/30 bg-violet/10 text-violet-soft',
 } as const
 
