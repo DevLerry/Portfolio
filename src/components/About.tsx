@@ -1,7 +1,10 @@
 import {
   about,
+  education,
   evidence,
+  experience,
   principles,
+  recognition,
   SKILL_LABELS,
   skillGroups,
   type Skill,
@@ -184,7 +187,81 @@ export function About() {
           </ol>
         </Reveal>
 
-        {/* ------------------------------------------------- 4. Evidence */}
+        {/* ------------------------------------------------- 4. Experience & education */}
+        <Reveal className="mt-24 sm:mt-28">
+          <h3 className="text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
+            Experience &amp; education
+          </h3>
+
+          <div className="mt-10 grid gap-12 lg:grid-cols-[1.25fr_1fr] lg:gap-14">
+            {/* A timeline: one rule down the left, a marker per role. */}
+            <ol className="relative space-y-9 border-l border-violet/20 pl-7">
+              {experience.map((role) => (
+                <li key={role.org} className="relative">
+                  {/* The marker sits ON the rule: half its width back from the padding. */}
+                  <span
+                    aria-hidden="true"
+                    className={`absolute -left-[33px] top-1.5 h-2.5 w-2.5 rounded-full ${
+                      role.current ? 'bg-online' : 'bg-violet/50'
+                    }`}
+                  />
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                    <h4 className="font-semibold text-ink">{role.title}</h4>
+                    <span className="text-xs text-ink-muted">{role.period}</span>
+                  </div>
+                  <p className="mt-0.5 text-sm text-violet-soft">{role.org}</p>
+                  <ul className="mt-3 space-y-2">
+                    {role.points.map((pt) => (
+                      <li key={pt} className="flex gap-3 text-sm leading-relaxed text-ink-muted">
+                        <span aria-hidden="true" className="mt-2 h-px w-3 shrink-0 bg-violet/40" />
+                        {pt}
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ol>
+
+            <div className="space-y-9">
+              <div>
+                <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted">
+                  Education
+                </h4>
+                <ul className="mt-4 space-y-4">
+                  {education.map((e) => (
+                    <li
+                      key={e.qualification}
+                      className="rounded-xl border border-violet/15 bg-surface/40 p-4"
+                    >
+                      <p className="font-medium text-ink">{e.qualification}</p>
+                      <p className="mt-1 text-sm text-ink-muted">{e.org}</p>
+                      <p className="mt-1 text-xs text-ink-muted/70">
+                        {e.period}
+                        {e.note ? ` · ${e.note}` : ''}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted">
+                  Recognition
+                </h4>
+                <ul className="mt-4 space-y-3">
+                  {recognition.map((r) => (
+                    <li key={r} className="flex gap-3 text-sm leading-relaxed text-ink-muted">
+                      <span aria-hidden="true" className="mt-2 h-px w-3 shrink-0 bg-violet/40" />
+                      {r}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* ------------------------------------------------- 5. Evidence */}
         <Reveal className="mt-24 sm:mt-28">
           <h3 className="text-2xl font-semibold tracking-[-0.02em] text-ink sm:text-3xl">
             Where these were used

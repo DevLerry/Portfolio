@@ -171,3 +171,82 @@ export const evidence: Evidence[] = [
     status: 'Built',
   },
 ]
+
+/* -----------------------------------------------------------------------------------------
+   Experience, education and recognition.
+
+   Taken from Imran's own CV (15 Oct 2026). Dates and institutions are as he wrote them.
+
+   Deliberately NOT included: the GitHub handle printed on that CV, which 404s, and the
+   banking-project role description, which contradicted the portfolio. Both were raised with
+   him and are being corrected at source rather than quietly reconciled here.
+----------------------------------------------------------------------------------------- */
+
+export interface Role {
+  title: string
+  org: string
+  period: string
+  points: string[]
+  current?: boolean
+  /** True where the wording still needs his sign-off. */
+  unconfirmed?: boolean
+}
+
+export const experience: Role[] = [
+  {
+    title: 'Software Development & Technical Support',
+    org: 'Triax Technologies',
+    period: 'Current',
+    current: true,
+    // TODO(Imran): confirm this wording — it is lifted from the CV you are revising.
+    unconfirmed: true,
+    points: [
+      'Supporting testing activities and helping identify areas needing review.',
+      'Contributing to project work including front-end development and scaffolding.',
+      'Workplace IT support: operating-system installation, patching and troubleshooting.',
+      'Structured study in Go alongside the day-to-day work.',
+    ],
+  },
+  {
+    title: 'Sales & Marketing Representative',
+    org: 'Startimes',
+    period: 'Jan – Dec 2018',
+    points: [
+      'Worked directly with customers, developing communication and service skills.',
+      'Engaged with customer feedback to understand what people actually needed.',
+    ],
+  },
+  {
+    title: 'Entrepreneurship & Digital Skills Training',
+    org: 'Jobber-Man Nigeria',
+    period: '2025',
+    points: ['Business development, digital marketing and entrepreneurial thinking.'],
+  },
+]
+
+export interface Study {
+  qualification: string
+  org: string
+  period: string
+  note?: string
+}
+
+export const education: Study[] = [
+  {
+    qualification: 'B.Sc.Ed., Geography Education',
+    org: 'Ahmadu Bello University, Zaria',
+    period: '2019 – 2025',
+    note: 'Second Class Upper Division (2:1)',
+  },
+  {
+    qualification: 'Software Development',
+    org: 'TS Academy — Phoenix Cohort',
+    period: 'Graduate',
+  },
+]
+
+export const recognition: string[] = [
+  'Best Graduating Geography Education Student — NAGEMS, 2025',
+  'Most Innovative and Creative Male Student — NAGEMS, 2025',
+  'Chairman, National Association of Geography and Environmental Management — 2024–2025',
+]
