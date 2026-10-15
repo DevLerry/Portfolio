@@ -55,8 +55,9 @@ export const projects: Project[] = [
       'A production-shaped banking backend built on the NibssByPhoenix rails. It handles customer onboarding with BVN and NIN verification, account creation, intra- and inter-bank transfers, and per-customer transaction history with strict data isolation. The service is the bank that sits on top of the rails — it never treats the provider as its own database.',
     tech: ['TypeScript', 'Express', 'MongoDB', 'Mongoose', 'Zod', 'JWT', 'React', 'Tailwind CSS'],
     status: 'in-development',
-    // The repository holds the backend only; the React client exists but has not been pushed.
-    statusNote: 'Backend published · web client not yet public',
+    // Backend and React client are both published now (client pushed 15 Oct 2026). There is
+    // still no hosted deployment, so no Live preview link is rendered.
+    statusNote: 'Full stack published · not deployed',
     preview: {
       kind: 'image',
       src: bankPreview,
@@ -96,7 +97,7 @@ export const projects: Project[] = [
   },
   {
     number: '03',
-    name: 'Traix Pulse',
+    name: 'Triax Pulse',
     category: 'Software Product', // TODO(Imran): replace with the real category.
     // TODO(Imran): nothing about this project exists in any repository I could inspect, so
     // this is the placeholder wording from the brief, not a verified description. Replace it
