@@ -8,6 +8,7 @@ import {
 } from '../data/profile'
 import { useReveal } from '../hooks/useReveal'
 import { ArrowRightIcon } from './icons'
+import { SectionWeave } from './SectionWeave'
 
 /* -----------------------------------------------------------------------------------------
    About · Skills · Approach · Evidence.
@@ -65,7 +66,14 @@ function SkillChip({ skill }: { skill: Skill }) {
 
 export function About() {
   return (
-    <section id="about" aria-labelledby="about-heading" className="relative px-6 py-24 sm:py-32">
+    <section
+      id="about"
+      aria-labelledby="about-heading"
+      className="relative isolate px-6 py-24 sm:py-32"
+    >
+      {/* The same drifting weave as the hero. The project sections are deliberately left
+          plain so the screenshots in them are the only texture competing for attention. */}
+      <SectionWeave />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[460px]"
