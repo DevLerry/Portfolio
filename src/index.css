@@ -54,9 +54,13 @@
    A 1:1 shift would run exactly along one family, leaving those lines looking frozen.
 --------------------------------------------------------------------------------------- */
 :root {
-  --grid-gap: 40px; /* distance between lines */
-  --grid-line: rgba(167, 139, 250, 0.22); /* the lattice itself — raise to make it bolder */
-  --grid-glow: rgba(139, 92, 246, 0.1); /* the halo under each line */
+  --grid-gap: 8px; /* distance between stripes — tight, like woven fabric */
+  /* The lattice is drawn in BLACK — lines that are etched into the surface rather than
+     glowing on top of it. Dark lines need light behind them to be seen at all, which is
+     why the violet glow below is lifted: the mesh reads clearly across the lit centre and
+     dissolves into the dark toward the edges. Raise this to deepen the lines. */
+  --grid-line: rgba(0, 0, 0, 0.5);
+  --grid-glow: rgba(0, 0, 0, 0.16); /* a softer stripe beneath, so the weave has depth */
   --grid-speed: 16s; /* one full loop. Higher = calmer */
 
   /* sqrt(2). Do not round this: an inexact period is exactly what makes a grid stutter. */
@@ -70,11 +74,13 @@
   /* Oversized on every side so the pattern never runs out at a corner. The parent clips
      it, which is what stops this creating a horizontal scrollbar. */
   inset: -50%;
+  /* ONE direction only. Two crossing sets make a lattice of diamonds; a single set makes
+     the fine woven pinstripe this design wants. */
+  /* 135deg leans the stripes top-left to bottom-right. Swap both to 45deg to lean the
+     other way — that single number is the whole decision. */
   background-image:
-    repeating-linear-gradient(45deg, var(--grid-line) 0 1px, transparent 1px var(--grid-gap)),
     repeating-linear-gradient(135deg, var(--grid-line) 0 1px, transparent 1px var(--grid-gap)),
-    repeating-linear-gradient(45deg, var(--grid-glow) 0 3px, transparent 3px var(--grid-gap)),
-    repeating-linear-gradient(135deg, var(--grid-glow) 0 3px, transparent 3px var(--grid-gap));
+    repeating-linear-gradient(135deg, var(--grid-glow) 0 2px, transparent 2px var(--grid-gap));
   animation: grid-drift var(--grid-speed) linear infinite;
   will-change: background-position;
 }
@@ -96,11 +102,13 @@
 .hero-wash {
   position: absolute;
   inset: 0;
+  /* Lifted from the original: a black grid is invisible on near-black, so the field it sits
+     on carries more violet light than it did when the lines were bright. */
   background: linear-gradient(
     180deg,
-    var(--color-surface) 0%,
-    transparent 42%,
-    color-mix(in oklab, var(--color-surface) 55%, transparent) 100%
+    color-mix(in oklab, var(--color-violet) 10%, var(--color-surface)) 0%,
+    color-mix(in oklab, var(--color-violet) 5%, var(--color-surface)) 55%,
+    color-mix(in oklab, var(--color-surface) 70%, transparent) 100%
   );
 }
 
@@ -115,9 +123,9 @@
   transform: translate3d(-50%, -50%, 0);
   background: radial-gradient(
     circle,
-    color-mix(in oklab, var(--color-violet) 26%, transparent) 0%,
-    color-mix(in oklab, var(--color-violet) 9%, transparent) 38%,
-    transparent 66%
+    color-mix(in oklab, var(--color-violet) 38%, transparent) 0%,
+    color-mix(in oklab, var(--color-violet) 15%, transparent) 42%,
+    transparent 72%
   );
 }
 
