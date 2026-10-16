@@ -77,7 +77,7 @@ export const flagship: CaseStudy = {
     },
   ],
   liveUrl: 'https://viora-swart.vercel.app',
-  repoUrl: 'https://github.com/hollops/Reelio',
+  repoUrl: 'https://github.com/DevLerry/Reelio',
 }
 
 export const caseStudies: CaseStudy[] = [

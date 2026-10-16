@@ -94,7 +94,7 @@ export const projects: Project[] = [
       alt: 'The Viora home page in dark mode, showing a featured video banner and a row of trending videos with thumbnails.',
     },
     liveUrl: 'https://viora-swart.vercel.app',
-    repoUrl: 'https://github.com/hollops/Reelio',
+    repoUrl: 'https://github.com/DevLerry/Reelio',
     extraUrl: { label: 'API docs', href: 'https://viora-api-oe5a.onrender.com/api-docs' },
     layout: 'right',
   },
