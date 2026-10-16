@@ -1,7 +1,15 @@
 import { useEffect, useState } from 'react'
 import { CV_URL, EMAIL, mailtoHref, navLinks, profiles } from '../data/contact'
 import { useReveal } from '../hooks/useReveal'
-import { ArrowUpIcon, CheckIcon, CopyIcon, DownloadIcon, GithubIcon, MailIcon } from './icons'
+import {
+  ArrowUpIcon,
+  CheckIcon,
+  CopyIcon,
+  DownloadIcon,
+  GithubIcon,
+  LinkedInIcon,
+  MailIcon,
+} from './icons'
 import { SectionWeave } from './SectionWeave'
 
 /* -----------------------------------------------------------------------------------------
@@ -72,6 +80,13 @@ function CopyEmail() {
   )
 }
 
+/** Each profile gets its own mark. One hardcoded icon would have put GitHub's logo on the
+    LinkedIn link, which looks like carelessness even when the href is right. */
+const PROFILE_ICONS: Record<string, (p: { className?: string }) => React.ReactElement> = {
+  GitHub: GithubIcon,
+  LinkedIn: LinkedInIcon,
+}
+
 function ProfileLinks({ compact = false }: { compact?: boolean }) {
   if (profiles.length === 0) return null
 
@@ -88,7 +103,10 @@ function ProfileLinks({ compact = false }: { compact?: boolean }) {
               compact ? 'px-3 py-2 text-xs' : 'px-4 py-2.5 text-sm'
             }`}
           >
-            <GithubIcon className={compact ? 'h-3.5 w-3.5' : 'h-4 w-4'} />
+            {(() => {
+              const Icon = PROFILE_ICONS[p.name] ?? GithubIcon
+              return <Icon className={compact ? 'h-3.5 w-3.5' : 'h-4 w-4'} />
+            })()}
             {p.name}
           </a>
         </li>

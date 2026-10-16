@@ -22,16 +22,15 @@ export const mailtoHref = `mailto:${EMAIL}?subject=${encodeURIComponent(EMAIL_SU
  *  THE CV.  ← this is the one line to change
  * ──────────────────────────────────────────────────────────────────────────────────────
  *
- * No CV exists yet, so this is `null` and every CV button simply does not render — in the
- * hero and in the contact section both. A button that 404s is worse than no button, and
- * until now the hero had exactly that.
+ * Set, so both CV buttons render — the one in the hero and the one in Contact. While this
+ * was `null` neither appeared, which is what kept a 404 off the page before the file existed.
  *
- * To turn them all on: drop the PDF into `public/` and set this to its path, for example
- *   export const CV_URL: string | null = '/Murtala-Imran-Dauda-CV.pdf'
- * Anything in `public/` is served from the site root. Use the real filename — it is what
- * a recruiter sees in their downloads folder.
+ * The file lives in `public/`, which is served from the site root. Its name is what lands in
+ * a recruiter's downloads folder, so it carries his, not "cv.pdf".
+ *
+ * To take the buttons down again, set this back to `null`.
  */
-export const CV_URL: string | null = null
+export const CV_URL: string | null = '/Murtala-Imran-Dauda-CV.pdf'
 
 export interface Profile {
   name: string
@@ -40,12 +39,17 @@ export interface Profile {
   label: string
 }
 
-/** Only profiles whose URL has been checked. Add LinkedIn and X here once supplied. */
+/** Only profiles whose URL has been checked. */
 export const profiles: Profile[] = [
   {
     name: 'GitHub',
     href: 'https://github.com/DevLerry',
     label: 'GitHub profile, DevLerry — opens in a new tab',
+  },
+  {
+    name: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/imran-murtala-702b1a19a',
+    label: 'LinkedIn profile, Imran Murtala — opens in a new tab',
   },
 ]
 

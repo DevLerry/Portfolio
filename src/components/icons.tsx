@@ -119,3 +119,11 @@ export function ArrowUpIcon({ className = 'h-4 w-4' }: IconProps) {
     </svg>
   )
 }
+
+export function LinkedInIcon({ className = 'h-4 w-4' }: IconProps) {
+  return (
+    <svg aria-hidden="true" className={className} viewBox="0 0 16 16" fill="currentColor">
+      <path d="M3.6 5.3H.9V16h2.7V5.3ZM2.25 0a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2ZM16 9.9c0-3-1.6-4.4-3.7-4.4-1.7 0-2.5.95-2.9 1.6V5.3H6.7c.04.76 0 10.7 0 10.7h2.7v-6c0-.24.02-.48.09-.65.19-.48.63-.98 1.37-.98.97 0 1.36.74 1.36 1.82V16H16V9.9Z" />
+    </svg>
+  )
+}
