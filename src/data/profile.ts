@@ -198,13 +198,18 @@ export const experience: Role[] = [
     org: 'Triax Technologies',
     period: 'Current',
     current: true,
-    // Title confirmed by Imran, 15 Oct 2026. The bullets below still come from his CV and
-    // are his to adjust.
+    // Rewritten for the confirmed title, 16 Oct 2026. Same facts as the CV, active rather
+    // than passive — "supporting" and "contributing" read as someone standing near the work.
+    // Still a trainee lead, so nothing here claims managing people or owning delivery.
+    //
+    // Triax's internal product names are deliberately left out. They appear in his CV, which
+    // goes to one reader at a time; this page is public, and naming an employer's unreleased
+    // products on it is his call to make, not a default.
     points: [
-      'Supporting testing activities and helping identify areas needing review.',
-      'Contributing to project work including front-end development and scaffolding.',
-      'Workplace IT support: operating-system installation, patching and troubleshooting.',
-      'Structured study in Go alongside the day-to-day work.',
+      'Test product builds and document what needs review before it moves on.',
+      'Build front-end features and stand up the architecture new projects start from.',
+      'Keep the workplace running — operating-system installs, patching, and troubleshooting system and connectivity faults.',
+      'Study Go in a structured way, working toward backend engineering.',
     ],
   },
   {
