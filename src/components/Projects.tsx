@@ -178,7 +178,12 @@ export function Projects() {
   const { ref, shown } = useReveal<HTMLDivElement>()
 
   return (
-    <section id="projects" className="relative px-6 py-24 sm:py-32" aria-labelledby="work-heading">
+    <section
+      id="projects"
+      // scroll-mt clears the fixed navbar; without it an #anchor lands under the bar.
+      className="relative scroll-mt-20 px-6 py-24 sm:py-32"
+      aria-labelledby="work-heading"
+    >
       <div className="mx-auto max-w-5xl">
         {/* --- Section header --- */}
         <div

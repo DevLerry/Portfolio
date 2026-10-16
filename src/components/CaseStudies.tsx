@@ -273,7 +273,7 @@ export function CaseStudies() {
     <section
       id="case-studies"
       aria-labelledby="case-studies-heading"
-      className="relative px-6 py-24 sm:py-32"
+      className="relative scroll-mt-20 px-6 py-24 sm:py-32"
     >
       {/* A soft violet pool so the section reads as its own chapter without a hard edge.
           Decorative, so it is hidden and cannot take a click. */}

@@ -72,7 +72,7 @@ export function About() {
     <section
       id="about"
       aria-labelledby="about-heading"
-      className="relative isolate px-6 py-24 sm:py-32"
+      className="relative isolate scroll-mt-20 px-6 py-24 sm:py-32"
     >
       {/* The same drifting weave as the hero. The project sections are deliberately left
           plain so the screenshots in them are the only texture competing for attention. */}

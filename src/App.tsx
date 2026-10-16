@@ -3,6 +3,7 @@ import { About } from './components/About'
 import { CaseStudies } from './components/CaseStudies'
 import { Contact } from './components/Contact'
 import { Hero } from './components/Hero'
+import { NavBar } from './components/NavBar'
 import { Projects } from './components/Projects'
 
 /**
@@ -34,12 +35,15 @@ export default function App() {
   useHashLanding()
 
   return (
-    <main>
-      <Hero />
-      <Projects />
-      <CaseStudies />
-      <About />
-      <Contact />
-    </main>
+    <>
+      <NavBar />
+      <main>
+        <Hero />
+        <Projects />
+        <CaseStudies />
+        <About />
+        <Contact />
+      </main>
+    </>
   )
 }
